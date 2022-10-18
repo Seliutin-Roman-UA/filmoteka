@@ -1,0 +1,15 @@
+.gallery {
+  display: flex;
+}
+.card {
+  width: 280px;
+  height: 438px;
+  @media screen and (min-width: 767.99px) {
+    width: 336px;
+    height: 495px;
+  }
+  @media screen and (min-width: 1279.99px) {
+    width: 394px;
+    height: 634px;
+  }
+}
