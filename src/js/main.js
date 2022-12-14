@@ -1,5 +1,5 @@
 import { getTOPmedia, getGenre, throwQuery } from './fetch.js';
-import { murkupcards } from './murkup';
+import { murkupcards } from './murkup.js';
 import { bildPagination } from './createpagination.js';
 
 export const session = {
@@ -19,10 +19,10 @@ export const session = {
   fillpaginationButton() {
     numberPage = this.currentPage - 1;
     totalPages = this.totalPages - 1;
-    console.log('строим по индексу', numberPage);
     let min, max;
 
     if (this.totalPages < 5) {
+      this.pagination.button = [];
       for (i = 0; i <= totalPages; i++) this.pagination.button[i] = 1;
       this.pagination.arrowLeft = 0;
       this.pagination.buttonStart = 0;
@@ -63,10 +63,10 @@ export const session = {
       return 'reject';
     }
     this.currentPage = numberPage;
-    const PageData = await this.query(numberPage);
-    session.totalPages = PageData.total_pages;
-    this.fillpaginationButton();
-    murkupcards(PageData.results);
+    const pageData = await this.query(numberPage);
+    session.totalPages = pageData.total_pages;
+    this.fillpaginationButton();  
+    murkupcards(pageData.results);
     bildPagination();
   },
 };
@@ -77,6 +77,7 @@ export const ref = {
   gallary: document.querySelector('.gallery'),
   pagination: document.querySelector('.pagination'),
   searchForm: document.querySelector('.searchform'),
+  modal: document.querySelector('.modal')
 };
 // block functions
 
@@ -88,13 +89,14 @@ async function firstPage() {
 }
 function onSubmitSearchForm(e) {
   e.preventDefault();
-  session.query = throwQuery(e.currentTarget.elements['string'].value);
+  const searchString = e.currentTarget.elements['string'].value;
+  if (searchString) {session.query = throwQuery(searchString)
+  } else { session.query = getTOPmedia};
   session.changeCurrentPage(1);
 }
 
 ref.searchForm.addEventListener('submit', onSubmitSearchForm);
+ref.searchForm.addEventListener('focusout', onSubmitSearchForm);
 
-console.log('Hello MAIN');
 firstPage();
-// const foo = throwQuery('dragon');
-// foo('1').then(data => console.log('data', data));
+

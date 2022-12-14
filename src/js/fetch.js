@@ -40,3 +40,19 @@ export async function getGenre(type) {
     console.log('i am so sorry', arror.message);
   }
 }
+
+export async function infoAboutMovie(type, id) {
+  let url = '';
+  if (type === 'movie')
+    url = `https://api.themoviedb.org/3/movie/${id}?api_key=09fddff29ca445d38e447ae99342142f`;
+  if (type === 'tv')
+    url = `https://api.themoviedb.org/3/tv/${id}?api_key=09fddff29ca445d38e447ae99342142f`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+   
+    return data;
+  } catch (error) {
+    console.log('i am so sorry', error.message);
+  }
+}

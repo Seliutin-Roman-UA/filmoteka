@@ -1,0 +1,39 @@
+.hidden {display: none;}
+.backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .5);
+    }
+.modal{ 
+    display: flex;
+    gap: 16px;
+    width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    max-height: 80vh;
+    overflow: auto;
+    background-color: #fff;
+    padding: 40px 12px;
+
+    @media screen and (min-width: 767.99px) {
+        width: 704px;       
+    }
+    @media screen and (min-width: 1279.99px) {
+        width: 806px;
+    }}
+    .modal__img {
+        width: 240px;
+        @media screen and (min-width: 767.99px) {
+                width: 264px;
+            }
+        
+            @media screen and (min-width: 1279.99px) {
+                width: 375px;
+            }
+        }
+    
