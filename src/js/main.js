@@ -43,7 +43,7 @@ export const session = {
       max = totalPages;
     }
 
-    for (i = 0; i <= totalPages; i++) {
+    for (let i = 0; i <= totalPages; i++) {
       this.pagination.button[i] = 0;
       if (i >= min && i <= max) this.pagination.button[i] = 1;
     }
