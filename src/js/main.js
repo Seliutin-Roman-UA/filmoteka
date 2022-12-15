@@ -17,8 +17,8 @@ export const session = {
   query: null,
 
   fillpaginationButton() {
-    numberPage = this.currentPage - 1;
-    totalPages = this.totalPages - 1;
+    let numberPage = this.currentPage - 1;
+    let totalPages = this.totalPages - 1;
     let min, max;
 
     if (this.totalPages < 5) {
